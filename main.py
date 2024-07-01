@@ -3,7 +3,8 @@ from playwright.async_api import async_playwright
 import time
 import json
 import asyncio
-from datetime import datetime, timedelta
+import datetime
+# from datetime import datetime, timedelta
 
 
 async def go_to_browser() -> dict | bool:
@@ -81,18 +82,18 @@ async def open_file_with_headers(path_to_file: str) -> bool | None:
     with open(path_to_file, 'r', encoding='utf-8') as file:
         headers = json.load(file)
 
-    curr_date_time = datetime.utcnow()
+    curr_date_time = datetime.datetime.now(datetime.UTC)
     date_from_json = headers['date']
 
     flag_to_open_browser = False
 
     if date_from_json:
-        date_from_json = datetime.strptime(date_from_json, "%d.%m.%Y|%H:%M")
+        date_from_json = datetime.datetime.strptime(date_from_json, "%d.%m.%Y|%H:%M")
 
         # обновляемся раз в 23 часа и 50 минут
         seconds_between_update = 23 * 60 * 60 + 50 * 60
 
-        if curr_date_time - date_from_json > timedelta(seconds=seconds_between_update):
+        if curr_date_time - date_from_json > datetime.timedelta(seconds=seconds_between_update):
             flag_to_open_browser = True
     else:
         flag_to_open_browser = True
@@ -117,12 +118,12 @@ async def open_file_with_headers(path_to_file: str) -> bool | None:
 
 if __name__ == '__main__':
     while True:
-        sleep_seconds = 3 * 60 * 60
+        sleep_sec = 3 * 60 * 60
 
         # путь можно указать абсолютный для того, чтобы положить json в корень проекта, из которого будет использоваться
         path_to_file_with_headers = 'headers.json'
 
-        print("Run:", (start_time := datetime.utcnow()).strftime('%d.%m.%Y | %H:%M'), '<- UTC time!')
+        print("Run:", (start_time := datetime.datetime.now(datetime.UTC)).strftime('%d.%m.%Y | %H:%M'), '<- UTC time!')
         flag = asyncio.run(open_file_with_headers(path_to_file_with_headers))
 
         # flag может принимать None в случае, если страница в браузере была перезагружена 5 раз и на каждом запуске
@@ -130,7 +131,7 @@ if __name__ == '__main__':
         # flag принимает значение True - если потребовалось открыть браузер и при этом заголовки были успешно получены.
         # flag принимает значение False - если с момента последнего обновления заголовков прошло меньше суток.
         if flag is None:
-            sleep_seconds = 3 * 60
+            sleep_sec = 3 * 60
             message = 'Bad response!'
         else:
             if flag:
@@ -138,6 +139,8 @@ if __name__ == '__main__':
             else:
                 message = 'Headers was reading from file.'
 
-        print(f'{message} Next run in {(start_time + timedelta(seconds=sleep_seconds)).strftime("%d.%m.%Y | %H:%M")}')
+        print(
+            f'{message} Next run in {(start_time + datetime.timedelta(seconds=sleep_sec)).strftime("%d.%m.%Y | %H:%M")}'
+        )
 
-        time.sleep(sleep_seconds)
+        time.sleep(sleep_sec)
