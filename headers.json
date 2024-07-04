@@ -1,4 +1,24 @@
 {
-    "date": "",
-    "headers": {}
+    "date": "04.07.2024|15:36",
+    "headers": {
+        "host": "www.ozon.ru",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:125.0) Gecko/20100101 Firefox/125.0",
+        "accept": "application/json",
+        "accept-language": "en-US,en;q=0.5",
+        "accept-encoding": "gzip, deflate, br",
+        "referer": "https://www.ozon.ru/?__rr=1&abt_att=1",
+        "x-o3-app-name": "dweb_client",
+        "x-o3-app-version": "release_3-6-2024_c2f55b1b",
+        "x-o3-manifest-version": "c2f55b1bc5818f1d7286cfcbc9ab56087222eff6",
+        "x-o3-parent-requestid": "7a9a0519840b3a833ea8cf6cd3ff9177",
+        "content-type": "application/json",
+        "content-length": "113",
+        "origin": "https://www.ozon.ru",
+        "alt-used": "www.ozon.ru",
+        "connection": "keep-alive",
+        "cookie": "__Secure-ETC=03e1ac556730bb432943040861c0d738; abt_data=65af2ea72ef313f6374d9012ca784f0d:72a47bbcab153cfb3a58a0e6373375fdb3e8b8dced59c347fdab39628b2c9cc9827ad562764ebb83aa1c3d66c71417eb962af1aa0631495dd44076744e5558249e60615d52602967408c98fc2291f4da8c1d9f205e61bd840fc1379d62c4e1f6791d7b12be27822ef368d82081cde8748f57a17681f68f6fccddc3858b1cf75cdc4d5453fbcf4c5cd3c6e7b4102b2177994ac64a4fa1c97e3a66b5e689e6cc576252326811f3f52d07bce207e67c579a14b9e804d06fc52f3f088c88fd746fa71d39cf92a4f6527824d6f2b192c7ef501d192eb16f32cf6ca8942ca2ec111f150a37ed1a9fe99702c833367580122a34f69b244d000d2b7e7ca3958efce0cf078d3a8e071a8f829209d7e5b45e898100bcf96250ec375751f18e147f7741e5ffa97fe61c5c4251d85336a32b5e814515; xcid=1866e84f9609b9d9721bf74df57cdc27; __Secure-ext_xcid=1866e84f9609b9d9721bf74df57cdc27; __Secure-access-token=5.0.qSr1H1VjQbSu3CqtfLI-eQ.82.AfgarSi4cMMeH4fWDGeGkSA_-k1OXibYbhVsfkAsImAbsGbS2WHj26elpgOX_1g3Cw..20240704103619.dNB93Tomt4ksLm5EtALgkxxtbA2EjNB0JT-vLWhXVR0.1d33af5cfc93d9e3c; __Secure-refresh-token=5.0.qSr1H1VjQbSu3CqtfLI-eQ.82.AfgarSi4cMMeH4fWDGeGkSA_-k1OXibYbhVsfkAsImAbsGbS2WHj26elpgOX_1g3Cw..20240704103619.6JN3pdgHZjyUo3HhgpLZconi9nRDZ4gxi5Wh96Pw-Qs.1c2ffb4d414c099b9; __Secure-ab-group=82; __Secure-user-id=0; rfuid=MjE0MjU3OTU4NCwzNS43NDk5NjYyNjAwNDU3NywtNjc3NzAyMTcwLEludGVsIE1hYyBPUyBYIDEwLjE1LC04OTIyNDQ2NDQsVzEwPSxXeUpsYmkxVlV5SXNJbVZ1TFZWVElpd2laVzRpWFE9PSwwLDEsMCwyNCwyMzc0MTU5MzAsLTEsMjI3MTI2NTIwLDAsMSwwLC00OTEyNzU1MjMsSUU1bGRITmpZWEJsSUVkbFkydHZJRTFoWTBsdWRHVnNJRFV1TUNBb1RXRmphVzUwYjNOb0tTQXlNREV3TURFd01TQk5iM3BwYkd4aCxlMzA9LDY1LDE4NjI5MjM5NDAsMSwxLC0xLDE2OTk5NTQ4ODcsMTY5OTk1NDg4NywyMTIxODAyODEyLDg=",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin"
+    }
 }

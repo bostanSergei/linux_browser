@@ -1,10 +1,13 @@
 from playwright.async_api import async_playwright
+from loguru import logger
 
 import time
 import json
 import asyncio
-import datetime
-# from datetime import datetime, timedelta
+from datetime import datetime, timedelta
+
+
+logger.add('log_file.log', rotation='5 MB')
 
 
 async def go_to_browser() -> dict | bool:
@@ -53,7 +56,7 @@ async def go_to_browser() -> dict | bool:
                 await browser.close()
                 await playwright_context_manager.stop()
 
-                print(f'Start page was reload five times and each time was unsuccessful!!!')
+                logger.error(f'Start page was reload five times and each time was unsuccessful!!!')
                 return False
 
             if response_obj.status != 200:
@@ -82,18 +85,18 @@ async def open_file_with_headers(path_to_file: str) -> bool | None:
     with open(path_to_file, 'r', encoding='utf-8') as file:
         headers = json.load(file)
 
-    curr_date_time = datetime.datetime.now(datetime.UTC)
+    curr_date_time = datetime.now()
     date_from_json = headers['date']
 
     flag_to_open_browser = False
 
     if date_from_json:
-        date_from_json = datetime.datetime.strptime(date_from_json, "%d.%m.%Y|%H:%M")
+        date_from_json = datetime.strptime(date_from_json, "%d.%m.%Y|%H:%M")
 
         # обновляемся раз в 23 часа и 50 минут
         seconds_between_update = 23 * 60 * 60 + 50 * 60
 
-        if curr_date_time - date_from_json > datetime.timedelta(seconds=seconds_between_update):
+        if curr_date_time - date_from_json > timedelta(seconds=seconds_between_update):
             flag_to_open_browser = True
     else:
         flag_to_open_browser = True
@@ -123,7 +126,9 @@ if __name__ == '__main__':
         # путь можно указать абсолютный для того, чтобы положить json в корень проекта, из которого будет использоваться
         path_to_file_with_headers = 'headers.json'
 
-        print("Run:", (start_time := datetime.datetime.now(datetime.UTC)).strftime('%d.%m.%Y | %H:%M'), '<- UTC time!')
+        logger.info(
+            f"Run: {(start_time := datetime.now()).strftime('%d.%m.%Y | %H:%M')}"
+        )
         flag = asyncio.run(open_file_with_headers(path_to_file_with_headers))
 
         # flag может принимать None в случае, если страница в браузере была перезагружена 5 раз и на каждом запуске
@@ -135,12 +140,17 @@ if __name__ == '__main__':
             message = 'Bad response!'
         else:
             if flag:
-                message = 'File was successfully save.'
+                message = 'Headers were received from the browser'
             else:
-                message = 'Headers was reading from file.'
+                message = 'Headers were reading from file.'
 
-        print(
-            f'{message} Next run in {(start_time + datetime.timedelta(seconds=sleep_sec)).strftime("%d.%m.%Y | %H:%M")}'
-        )
+        if message == 'Bad response!':
+            logger.error(
+                f'{message} Next run in {(start_time + timedelta(seconds=sleep_sec)).strftime("%d.%m.%Y | %H:%M")}'
+            )
+        else:
+            logger.info(
+                f'{message} Next run in {(start_time + timedelta(seconds=sleep_sec)).strftime("%d.%m.%Y | %H:%M")}'
+            )
 
         time.sleep(sleep_sec)
